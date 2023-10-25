@@ -90,7 +90,7 @@ def createFoldAccuracy(k,model, accuracy, dataset, fold, y_real, y_predict):
 
 # Funcion para realizar la validacion cruzada y calcular la precision
 for k in k_values:
-    kf = KFold(n_splits=k, shuffle=True, random_state=0)
+    kf = KFold(n_splits=k, shuffle=False, random_state=None)
     
     accuracies_gnb = []  # Almacenar las precisiones para Gaussian Naive Bayes
     accuracies_mnb = []  # Almacenar las precisiones para Multinomial Naive Bayes
@@ -137,7 +137,7 @@ configIris = getBestConfig(a_i, accuracyIris)
 
 # Funcion para realizar la validacion cruzada y calcular la precision
 for k in k_values:
-    kf1 = KFold(n_splits=k, shuffle=True, random_state=0)
+    kf1 = KFold(n_splits=k, shuffle=False, random_state=None)
     
     accuraciesE_gnb = []  # Almacenar las precisiones para Gaussian Naive Bayes para email
     accuraciesE_mnb = []  # Almacenar las precisiones para Multinomial Naive Bayes para email
