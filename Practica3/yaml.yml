@@ -1,0 +1,17 @@
+spring:
+
+  application:
+    name: API_Verificaion
+
+  jpa:
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.Oracle10gDialect
+        ddl-auto: create
+  thymeleaf:
+    cache: false
+  contador:
+    timeout:
+      read: 0
+      connect: 0
+  

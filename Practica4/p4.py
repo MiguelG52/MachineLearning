@@ -126,7 +126,7 @@ def createConfusionMatrix(name,y_test, y_prediction, labels):
     plt.savefig(f"confusion_matrix_{name}.png", format="png")
     plt.close()
 
-#Genera los accuracis de los pliegues para añadirlos a un arreglo y calcular el accuracy de cada configuracion
+#Genera los accuracies de los pliegues para añadirlos a un arreglo y calcular el accuracy promedio.ss de cada configuracion
 makeKnn(xTrain=x_iris_train, yTrain=y_iris_train,neighbors=1, dataset="iris",infoKnn=iris, knn_mean=knn_accuracies_iris,weight="----")
 makeKnn(xTrain=x_iris_train, yTrain=y_iris_train, neighbors=10,dataset="iris",infoKnn=iris, knn_mean= knn_accuracies_iris, weight="uniform")
 makeKnn(xTrain=x_iris_train, yTrain=y_iris_train, neighbors=10,dataset="iris",infoKnn=iris, knn_mean= knn_accuracies_iris, weight="distance")
@@ -153,7 +153,7 @@ else:
 
 knn.fit(x_iris_train, y_iris_train)
 iris_prediction = knn.predict(x_iris_test)
-
+accuracyIrisFinal = accuracy_score(y_iris_test, iris_prediction)
 
 #decide cual configuracion usarpara crear el entrenamiento e emails
 if(configEmails.get("neighbors") == 1):
@@ -162,6 +162,7 @@ else:
     knn = KNeighborsClassifier(n_neighbors=configEmails["neighbors"], weights=configEmails["weight"])
 knn.fit(x_train_email, y_train_email)
 emails_prediction = knn.predict(x_test_email)
+accuracyEmailFinal = accuracy_score(y_test_email, emails_prediction)
 
 # Imprimir la matriz de confusión utilizando createConbfusionMatrix
 labels =["Iris setosa","iris versicolor","iris-verginica"]
@@ -214,14 +215,14 @@ pdf.cell(30, 10, str("Naive Bayes"), border=1)
 pdf.cell(30, 10, str("------"), border=1)
 pdf.cell(30, 10, str("------"), border=1)
 pdf.cell(30, 10, str("Normal"), border=1)
-pdf.cell(30, 10, str("0.9523809523809522"), border=1)
+pdf.cell(30, 10, str("1.0"), border=1)
 pdf.ln()
 pdf.cell(30, 10, str(""), border=1)
 pdf.cell(30, 10, str("K-NN"), border=1)
 pdf.cell(30, 10, str(configIris["neighbors"]), border=1)
 pdf.cell(30, 10, str(configIris["weight"]), border=1)
 pdf.cell(30, 10, str("------"), border=1)
-pdf.cell(30, 10, str(configIris['accuracy']), border=1)
+pdf.cell(30, 10, str(accuracyIrisFinal), border=1)
 pdf.ln()
 pdf.cell(30, 10, str("emails"), border=1)
 pdf.cell(30, 10, str("Naive Bayes"), border=1)

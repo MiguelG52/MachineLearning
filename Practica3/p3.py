@@ -184,13 +184,16 @@ configEmails = getBestConfig(a_e, accuracyEmails)
 iris_prediction = None
 emails_prediction = None
 
+iris_accuracy_final = None
 
 if(configIris.get("model") == "normal"):
     gaussian_nb.fit(x_iris_train, y_iris_train)
     iris_prediction = gaussian_nb.predict(x_iris_test)
+    iris_accuracy_final = accuracy_score(y_iris_test, iris_prediction)
 else:
     multinomial_nb.fit(x_iris_train, y_iris_train)
     iris_prediction = multinomial_nb.predict(x_iris_test)
+    iris_accuracy_final = accuracy_score(y_iris_test, iris_prediction)
 
 if(configEmails.get("model") == "normal"):
     gaussian_nb.fit(x_train_email, y_train_email)
@@ -199,7 +202,7 @@ else:
     multinomial_nb.fit(x_train_email, y_train_email)
     emails_prediction = multinomial_nb.predict(x_test_email)    
 
-    
+print(iris_accuracy_final)
 cm = confusion_matrix(y_iris_test, iris_prediction)
 
 # Imprimir la matriz de confusión utilizando ConfusionMatrixDisplay
